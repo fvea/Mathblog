@@ -1,0 +1,19 @@
+{% extends 'blog_QA/base.html' %}
+
+{% block content %}
+
+  <p>Topic: {{ topic }}</p>
+
+  <p>Entries:</p>
+  <ul>
+      {% for entry in entries %}
+        <li>
+            <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
+            <p>{{ entry.text|safe }}</p><br>
+        </li>
+      {% empty %}
+      <li>There are no entries for this topic yet.</li>
+      {% endfor %}
+  </ul>
+
+{% endblock content %}
