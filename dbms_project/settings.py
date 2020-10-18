@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # My_apps
     'blog_QA',
+
+    # Third party apps
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
