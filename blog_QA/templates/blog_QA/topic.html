@@ -5,6 +5,11 @@
   <p>Topic: {{ topic }}</p>
 
   <p>Entries:</p>
+  <p>
+    <form action="{% url 'blog_QA:new_entry' topic.id %}">
+      <button name="submit">Add new entry</button>
+    </form>
+  </p>
   <ul>
       {% for entry in entries %}
         <li>
