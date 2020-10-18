@@ -124,3 +124,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CKEDITOR_CONFIGS = {
+    'default' : {
+    'extraPlugins': 'eqneditor',
+    'toolbar_Full': [
+                ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
+                ['Link', 'Unlink', 'Anchor'],
+                ['Image', 'Flash', 'Table', 'HorizontalRule'],
+                ['TextColor', 'BGColor'],
+                ['Smiley', 'SpecialChar'], ['Source'],
+                ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                ['NumberedList','BulletedList'],
+                ['Indent','Outdent'],
+                ['EqnEditor','Maximize'],
+            ],
+    }
+}
