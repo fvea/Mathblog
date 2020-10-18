@@ -1,5 +1,7 @@
 from django.db import models
 
+from ckeditor import fields
+
 # Create your models here.
 class Topic(models.Model):
     """ A topic or question the user wants to talk about. """
@@ -14,7 +16,7 @@ class Topic(models.Model):
 class Entry(models.Model):
     """ An entry for a topic. """
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = fields.RichTextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
