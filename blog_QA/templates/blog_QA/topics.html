@@ -14,4 +14,8 @@
       {% endfor %}
   </ul>
 
+  <form action="{% url 'blog_QA:new_topic' %}" method="GET">
+    <button name="submit">Add new topic</button>
+  </form>
+
 {% endblock content %}
