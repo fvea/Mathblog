@@ -16,6 +16,9 @@
             <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
             <p>{{ entry.text|safe }}</p><br>
         </li>
+      <form action="{% url 'blog_QA:edit_entry' entry.id %}">
+        <button name="submit">Edit entry</button>
+      </form>
       {% empty %}
       <li>There are no entries for this topic yet.</li>
       {% endfor %}

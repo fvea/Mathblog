@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
 # Create your views here.
@@ -8,7 +8,7 @@ from .forms import TopicForm, EntryForm
 def index(request):
     """ The home page for the MathBlog. """
     return render(request, 'blog_QA/index.html')
-    
+
 
 def topics(request):
     """ Show all topics. """
@@ -62,4 +62,22 @@ def new_entry(request, topic_id):
     context = {'topic': topic, 'form': form}
     return render(request, 'blog_QA/new_entry.html', context)
 
+
+def edit_entry(request, entry_id):
+    """ Edit an existing entry. """
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current entry.
+        form = EntryForm(instance=entry)
+    else:
+        # POST data submimtted; process data
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog_QA:topic', topic_id=topic.id)
+
+    context = {'entry': entry, 'topic': topic, 'form': form}
+    return render(request, 'blog_QA/edit_entry.html', context)
 
