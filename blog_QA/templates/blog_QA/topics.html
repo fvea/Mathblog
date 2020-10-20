@@ -11,11 +11,17 @@
   <ul>
       {% for topic in topics %}
         <li>
-          <p><b>{{ topic }}</b> ({{ topic.date_added|date:'M d, Y H:i' }})</p>
-          <form action="{% url 'blog_QA:edit_topic' topic.id%}" method="GET">
-            <button name="submit">Edit topic</button>
+            <p>
+              <b>{{ topic }}</b> ({{ topic.date_added|date:'M d, Y H:i' }})
+              <a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a>
+            </p>
+
+          <p>{{ topic.body_text|safe }} </p>
+
+          <form action="{% url 'blog_QA:new_entry' topic.id%}" method="GET">
+            <button name="submit">Add Entry</button>
           </form>
-          <p>{{ topic.body_text|safe }} </p><br>
+          <br>
         </li>
       {% empty %}
         <li>No topics have been added yet.</li>

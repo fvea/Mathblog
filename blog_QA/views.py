@@ -45,6 +45,7 @@ def new_topic(request):
 def new_entry(request, topic_id):
     """ Add a new entry for a particular topic. """
     topic = Topic.objects.get(id=topic_id)
+    entries = topic.entry_set.order_by('-date_added')
 
     if request.method != 'POST':
         # No data submitted; create a blank form.
@@ -56,10 +57,9 @@ def new_entry(request, topic_id):
             new_entry = form.save(commit=False)
             new_entry.topic = topic
             new_entry.save()
-            return redirect('blog_QA:topic', topic_id=topic_id)
         
     # Display a blank form or invalid form.
-    context = {'topic': topic, 'form': form}
+    context = {'topic': topic, 'entries': entries, 'form': form}
     return render(request, 'blog_QA/new_entry.html', context)
 
 
