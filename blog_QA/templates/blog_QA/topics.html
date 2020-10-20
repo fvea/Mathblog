@@ -7,7 +7,8 @@
   <ul>
       {% for topic in topics %}
         <li>
-          <a href="{% url 'blog_QA:topic' topic.id %}">{{ topic }}</a>
+          <p><b>{{ topic }}</b> ({{ topic.date_added|date:'M d, Y H:i' }})</p>
+          <p>{{ topic.body_text|safe }} </p><br>
         </li>
       {% empty %}
         <li>No topics have been added yet.</li>
