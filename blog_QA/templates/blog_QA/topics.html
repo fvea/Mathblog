@@ -8,6 +8,9 @@
       {% for topic in topics %}
         <li>
           <p><b>{{ topic }}</b> ({{ topic.date_added|date:'M d, Y H:i' }})</p>
+          <form action="{% url 'blog_QA:edit_topic' topic.id%}" method="GET">
+            <button name="submit">Edit topic</button>
+          </form>
           <p>{{ topic.body_text|safe }} </p><br>
         </li>
       {% empty %}

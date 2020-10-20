@@ -63,6 +63,25 @@ def new_entry(request, topic_id):
     return render(request, 'blog_QA/new_entry.html', context)
 
 
+def edit_topic(request, topic_id):
+    """ Edit an existing topic. """
+    topic = Topic.objects.get(id=topic_id)
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current entry.
+        form = TopicForm(instance=topic)
+    else:
+        # POST data submitted; process data
+        form = TopicForm(instance=topic, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog_QA:topics')
+    
+    # Display a blank form or invalid form.
+    context = {'topic': topic, 'form': form}
+    return render(request, 'blog_QA/edit_topic.html', context)
+
+
 def edit_entry(request, entry_id):
     """ Edit an existing entry. """
     entry = Entry.objects.get(id=entry_id)
