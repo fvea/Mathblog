@@ -6,6 +6,7 @@
 
   <form action="{% url 'blog_QA:new_topic' %}" method="POST">
       {% csrf_token %}
+      {{ form.media }}
       {{ form.as_p }}
       <button name="submit">Add topic</button>
   </form>
