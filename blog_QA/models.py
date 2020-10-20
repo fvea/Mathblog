@@ -7,6 +7,7 @@ class Topic(models.Model):
     """ A topic or question the user wants to talk about. """
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
+    body_text = fields.RichTextField()
 
     def __str__(self):
         """ Return a string representation of the model. """
