@@ -2,6 +2,10 @@
 
 {% block content %}
 
+  <form action="{% url 'blog_QA:new_topic' %}" method="GET">
+    <button name="submit">Add new topic</button>
+  </form>
+
   <p>Topics</p>
   
   <ul>
@@ -17,9 +21,5 @@
         <li>No topics have been added yet.</li>
       {% endfor %}
   </ul>
-
-  <form action="{% url 'blog_QA:new_topic' %}" method="GET">
-    <button name="submit">Add new topic</button>
-  </form>
 
 {% endblock content %}
