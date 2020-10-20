@@ -95,8 +95,7 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('blog_QA:topic', topic_id=topic.id)
+            return redirect('blog_QA:new_entry', topic_id=topic.id)
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'blog_QA/edit_entry.html', context)
-
