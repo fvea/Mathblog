@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # My_apps
     'blog_QA',
-    'users'
+    'users',
 
     # Third party apps
     'ckeditor',
