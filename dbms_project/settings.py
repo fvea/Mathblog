@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # My_apps
     'blog_QA',
+    'users'
 
     # Third party apps
     'ckeditor',
@@ -125,6 +126,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+# Ckeditor configurations
 CKEDITOR_CONFIGS = {
     'default' : {
     'extraPlugins': 'eqneditor',
