@@ -42,7 +42,7 @@ def new_topic(request):
     return render(request, 'blog_QA/new_topic.html', context)
 
 
-def new_entry(request, topic_id):
+def entries(request, topic_id):
     """ Add a new entry for a particular topic. """
     topic = Topic.objects.get(id=topic_id)
     entries = topic.entry_set.order_by('-date_added')
@@ -60,7 +60,7 @@ def new_entry(request, topic_id):
         
     # Display a blank form or invalid form.
     context = {'topic': topic, 'entries': entries, 'form': form}
-    return render(request, 'blog_QA/new_entry.html', context)
+    return render(request, 'blog_QA/entries.html', context)
 
 
 def edit_topic(request, topic_id):
@@ -95,7 +95,7 @@ def edit_entry(request, entry_id):
         form = EntryForm(instance=entry, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('blog_QA:new_entry', topic_id=topic.id)
+            return redirect('blog_QA:entries', topic_id=topic.id)
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'blog_QA/edit_entry.html', context)

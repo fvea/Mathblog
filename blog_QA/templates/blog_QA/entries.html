@@ -32,7 +32,7 @@
   
   <p id="add_entry">Add a new entry:</p>
 
-  <form action="{% url 'blog_QA:new_entry' topic.id%}" method="POST">
+  <form action="{% url 'blog_QA:entries' topic.id%}" method="POST">
       {% csrf_token %}
       {{ form.media }}
       {{ form.as_p }}
