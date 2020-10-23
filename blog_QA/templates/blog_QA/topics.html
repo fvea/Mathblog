@@ -11,8 +11,9 @@
   <ul>
       {% for topic in topics %}
         <li>
+            <p><b>{{ user.username }} </b>({{ topic.date_added|date:'M d, Y H:i' }})</p>
             <p>
-              <b>{{ topic }}</b> ({{ topic.date_added|date:'M d, Y H:i' }})
+              <b>{{ topic }}</b>
               {% if user == topic.owner %}
               <a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a>
               {% endif %}
