@@ -46,7 +46,7 @@ def new_topic(request):
 
 @login_required
 def entries(request, topic_id):
-    """ Add a new entry for a particular topic. """
+    """ See all the entries to a topic or Add a new entry """
     topic = Topic.objects.get(id=topic_id)
     entries = topic.entry_set.order_by('-date_added')
 

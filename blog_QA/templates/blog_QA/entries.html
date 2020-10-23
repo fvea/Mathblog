@@ -20,6 +20,9 @@
       {% for entry in entries %}
         <li>
             <p><b>{{ entry.owner }}</b> ({{ entry.date_added|date:'M d, Y H:i' }})</p>
+            {% if user == entry.owner %}
+              <a href="{% url 'blog_QA:edit_entry' entry.id%}">Edit Entry</a>
+            {% endif %}
             <p>{{ entry.text|safe }}</p><br>
         </li>
       {% empty %}
