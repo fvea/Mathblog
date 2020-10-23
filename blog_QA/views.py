@@ -59,6 +59,7 @@ def entries(request, topic_id):
         if form.is_valid():
             new_entry = form.save(commit=False)
             new_entry.topic = topic
+            new_entry.owner = request.user
             new_entry.save()
         
     # Display a blank form or invalid form.

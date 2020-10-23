@@ -11,7 +11,10 @@
   <ul>
       {% for topic in topics %}
         <li>
-            <p><b>{{ user.username }} </b>({{ topic.date_added|date:'M d, Y H:i' }})</p>
+            <p>
+              <b>{{ topic.owner }}</b>
+              ({{ topic.date_added|date:'M d, Y H:i' }})
+            </p>
             <p>
               <b>{{ topic }}</b>
               {% if user == topic.owner %}
