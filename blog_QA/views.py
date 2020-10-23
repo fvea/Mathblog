@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
@@ -70,6 +71,9 @@ def entries(request, topic_id):
 def edit_topic(request, topic_id):
     """ Edit an existing topic. """
     topic = Topic.objects.get(id=topic_id)
+    # Make sure the topic belongs to the current user.
+    if topic.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         # Initial request; pre-fill form with the current entry.
@@ -90,6 +94,9 @@ def edit_entry(request, entry_id):
     """ Edit an existing entry. """
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
+    # Make sure the topic belongs to the current user.
+    if topic.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         # Initial request; pre-fill form with the current entry.
