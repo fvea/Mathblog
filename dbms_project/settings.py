@@ -144,3 +144,6 @@ CKEDITOR_CONFIGS = {
             ],
     }
 }
+
+# My settings
+LOGIN_URL = 'users:login'
