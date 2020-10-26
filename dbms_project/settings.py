@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'ckeditor',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

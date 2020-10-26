@@ -1,18 +1,21 @@
 {% extends "blog_QA/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
+  <div class="pb-5 mb-5 border-bottom">
+    <h2>Log in to your account.</h2>
+  </div>
+  <div>
+  <form method="post" action="{% url 'users:login' %}" class="form">
 
-  {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
-
-  <form method="POST" action="{% url 'users:login' %}">
       {% csrf_token %}
-      {{ form.as_p }}
+      {% bootstrap_form form %}
 
-      <button name="submit">Log in</button>
+      {% buttons %}
+        <button name="submit" class="btn btn-primary">Log in</button>
+      {% endbuttons %}
       <input type="hidden" name="next"
         value="{% url 'blog_QA:index' %}">
   </form>
-
+  </div>
 {% endblock content %}
