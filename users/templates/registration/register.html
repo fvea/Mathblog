@@ -1,13 +1,23 @@
 {% extends "blog_QA/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
-  
-  <form method="POST" action="{% url 'users:register' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
 
-    <button name="submit">Register</button>
-    <input type="hidden" name="next" value="{% url 'blog_QA:index' %}">
-  </form>
+  <header class="masthead bg-secondary text-white">
+    <div class="container d-flex align-items-center flex-column">
+        <img class="masthead-avatar mb-1" src="{% static 'assets/img/MathLabLogo.png' %}" alt="" />
+        <p class="masthead-subheading font-weight-light mb-1">Register a new account.</p>
+        <form method="POST" action="{% url 'users:register' %}" class="form">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons %}
+          <button name="submit" class="btn btn-primary">Register</button>
+          {% endbuttons %}
+          <input type="hidden" name="next" value="{% url 'blog_QA:index' %}">
+        </form>
+    </div>
+  </header>
+
   
 {% endblock content %}
