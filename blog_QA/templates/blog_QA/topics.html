@@ -20,6 +20,7 @@
             {% endif %}
           </h4>
           <div class="card-body">
+            <b>{{ topic.text|safe }}</b>
             {{ topic.body_text|safe }}
             <form action="{% url 'blog_QA:entries' topic.id%}" method="GET">
               {% buttons %}
