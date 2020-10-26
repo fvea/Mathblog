@@ -27,7 +27,7 @@
             {{ entry.owner }}
             ({{ entry.date_added|date:'M d, Y H:i' }})
             {% if user == entry.owner %}
-            <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Entry</a></small>
+            <small><a href="{% url 'blog_QA:edit_entry' entry.id%}">Edit Entry</a></small>
             {% endif %}
           </h4>
           <div class="card-body">
