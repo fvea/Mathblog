@@ -1,42 +1,51 @@
 {% extends "blog_QA/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
 
-  <ul>
-    <li>
-      <p id="topic"><b>{{ topic }}</b> ({{ topic.date_added|date:'M d, Y H:i' }})</p>
-      <p>{{ topic.body_text|safe }} </p>
-    </li>
-  </ul>
-  <br>
-
-  <p>Entries:</p>
-  <p>
-    <form action="#add_entry">
-      <button name="submit">Add new entry</button>
-    </form>
-  </p>
-  <ul>
+  <header class="masthead bg-tertiary text-black">
+    <div class="container d-flex flex-column">
+      <div class="card mb-3">
+        <h4 class="card-header">
+          <b>{{ topic.owner }}</b>
+          ({{ topic.date_added|date:'M d, Y H:i' }})
+          {% if user == topic.owner %}
+          <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a></small>
+          {% endif %}
+        </h4>
+        <div class="card-body">
+          {{ topic.body_text|safe }}<br>
+        </div>
+      </div>
+      <form action="#add_entry">
+        <button name="submit" class="btn btn-primary">Add new entry</button>
+      </form> 
+      <p class="masthead-subheading font-weight-light mb-1">Entries:</p>
       {% for entry in entries %}
-        <li>
-            <p><b>{{ entry.owner }}</b> ({{ entry.date_added|date:'M d, Y H:i' }})</p>
+        <div class="card mb-3">
+          <h4 class="card-header">
+            {{ entry.owner }}
+            ({{ entry.date_added|date:'M d, Y H:i' }})
             {% if user == entry.owner %}
-              <a href="{% url 'blog_QA:edit_entry' entry.id%}">Edit Entry</a>
+            <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Entry</a></small>
             {% endif %}
-            <p>{{ entry.text|safe }}</p><br>
-        </li>
+          </h4>
+          <div class="card-body">
+            {{ entry.text|safe }}<br>
+          </div>
+        </div>
       {% empty %}
-      <li>There are no entries for this topic yet.</li>
+        <p>There are no entries for this topic yet.</p> 
       {% endfor %}
-  </ul>
-  
-  <p id="add_entry">Add a new entry:</p>
 
-  <form action="{% url 'blog_QA:entries' topic.id%}" method="POST">
-      {% csrf_token %}
-      {{ form.media }}
-      {{ form.as_p }}
-      <button name="submit">Add entry</button>
-  </form>
+    <form action="{% url 'blog_QA:entries' topic.id%}" method="POST" class="form" id="add_entry">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button name="submit" class="btn btn-primary">Add entry</button>
+    </form>   
+
+    </div>
+  </header>
 
 {% endblock content %}
