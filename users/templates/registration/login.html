@@ -1,20 +1,19 @@
 {% extends "blog_QA/base.html" %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
-  <header class="masthead bg-primary text-white">
+  <header class="masthead bg-secondary text-white">
     <div class="container d-flex align-items-center flex-column">
-        <p class="masthead-subheading font-weight-light mb-5">Log in to your account.</p>
+        <img class="masthead-avatar mb-1" src="{% static 'assets/img/MathLabLogo.png' %}" alt="" />
+        <p class="masthead-subheading font-weight-light mb-1">Log in to your account.</p>
         <form method="post" action="{% url 'users:login' %}" class="form">
-
           {% csrf_token %}
           {% bootstrap_form form %}
-    
           {% buttons %}
-            <button name="submit" >Log in</button>
+          <button name="submit" class="btn btn-primary">Log in</button>
           {% endbuttons %}
-          <input type="hidden" name="next"
-            value="{% url 'blog_QA:index' %}">
+          <input type="hidden" name="next" value="{% url 'blog_QA:index' %}">
       </form>
     </div>
   </header>
