@@ -1,37 +1,37 @@
 {% extends "blog_QA/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
-
-  <form action="{% url 'blog_QA:new_topic' %}" method="GET">
-    <button name="submit">Add new topic</button>
-  </form>
-
-  <p>Topics</p>
-  
-  <ul>
+  <header class="masthead bg-tertiary text-black">
+    <div class="container d-flex flex-column">
+      <h4 class="masthead-heading text-uppercase mb-4">Topics:</h4>
+      <form action="{% url 'blog_QA:new_topic' %}" method="GET">
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">Add New Topic</button>
+        {% endbuttons %}
+      </form>
       {% for topic in topics %}
-        <li>
-            <p>
-              <b>{{ topic.owner }}</b>
-              ({{ topic.date_added|date:'M d, Y H:i' }})
-            </p>
-            <p>
-              <b>{{ topic }}</b>
-              {% if user == topic.owner %}
-              <a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a>
-              {% endif %}
-            </p>
-
-          <p>{{ topic.body_text|safe }} </p>
-
-          <form action="{% url 'blog_QA:entries' topic.id%}" method="GET">
-            <button name="submit">See Entries</button>
-          </form>
-          <br>
-        </li>
+        <div class="card mb-3">
+          <h4 class="card-header">
+            <b>{{ topic.owner }}</b>
+            ({{ topic.date_added|date:'M d, Y H:i' }})
+            {% if user == topic.owner %}
+            <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a></small>
+            {% endif %}
+          </h4>
+          <div class="card-body">
+            {{ topic.body_text|safe }}
+            <form action="{% url 'blog_QA:entries' topic.id%}" method="GET">
+              {% buttons %}
+                <button name="submit" class="btn btn-primary">See entries</button>
+              {% endbuttons %}
+            </form>
+            <br>
+          </div>
+        </div>
       {% empty %}
-        <li>No topics have been added yet.</li>
+        <p>No topics have been added yet.</p>
       {% endfor %}
-  </ul>
-
+    </div>
+  </header>
 {% endblock content %}
