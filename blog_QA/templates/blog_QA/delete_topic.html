@@ -1,0 +1,24 @@
+{% extends 'blog_QA/base.html' %}
+
+{% block content %}
+  <header class="masthead bg-tertiary text-black ">
+    <div class="container d-flex flex-column">
+      <p class="masthead-subheading font-weight-light mb-3">
+        <b>Delete Topic</b></p>
+      <p class="masthead-subheading font-weight-light mb-3">
+        <b>Do you want to delete the topic "{{ topic.text }}"?</b></p>
+
+        <form action="{% url 'blog_QA:delete_topic' topic.id %}" class="form mb-3" method="POST">
+            {% csrf_token %}
+            <button name="submit" class="btn btn-primary">Yes</button>
+        </form>
+
+        <form action="{% url 'blog_QA:topics' %}">
+            {% csrf_token %}
+            <button name="submit" class="btn btn-primary">No</button>
+        </form>
+
+    </div>
+</header>
+
+{% endblock content %}

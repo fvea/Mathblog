@@ -11,12 +11,14 @@ def index(request):
     """ The home page for the MathBlog. """
     return render(request, 'blog_QA/index.html')
 
+
 @login_required
 def topics(request):
     """ Show all topics. """
     topics = Topic.objects.order_by('-date_added')
     context = {'topics': topics}
     return render(request, 'blog_QA/topics.html', context)
+
 
 @login_required
 def topic(request, topic_id):
@@ -25,6 +27,7 @@ def topic(request, topic_id):
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'blog_QA/topic.html', context)
+
 
 @login_required
 def new_topic(request):
@@ -44,6 +47,7 @@ def new_topic(request):
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'blog_QA/new_topic.html', context)
+
 
 @login_required
 def entries(request, topic_id):
@@ -67,6 +71,7 @@ def entries(request, topic_id):
     context = {'topic': topic, 'entries': entries, 'form': form}
     return render(request, 'blog_QA/entries.html', context)
 
+
 @login_required
 def edit_topic(request, topic_id):
     """ Edit an existing topic. """
@@ -89,6 +94,7 @@ def edit_topic(request, topic_id):
     context = {'topic': topic, 'form': form}
     return render(request, 'blog_QA/edit_topic.html', context)
 
+
 @login_required
 def edit_entry(request, entry_id):
     """ Edit an existing entry. """
@@ -110,3 +116,19 @@ def edit_entry(request, entry_id):
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'blog_QA/edit_entry.html', context)
+
+
+@login_required
+def delete_topic(request, topic_id):
+    topic = Topic.objects.get(id=topic_id)
+    # Make sure the topic belongs to the current user.
+    if topic.owner != request.user:
+        raise Http404
+
+    if request.method == 'POST':
+        # Delete confirmed
+        topic.delete()
+        return redirect('blog_QA:topics')
+
+    context = {'topic': topic}
+    return render(request, 'blog_QA/delete_topic.html', context)

@@ -17,6 +17,7 @@
             ({{ topic.date_added|date:'M d, Y H:i' }})
             {% if user == topic.owner %}
             <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a></small>
+            <small><a href="{% url 'blog_QA:delete_topic' topic.id%}" style="color: red;">Delete Topic</a></small>
             {% endif %}
           </h4>
           <div class="card-body">
