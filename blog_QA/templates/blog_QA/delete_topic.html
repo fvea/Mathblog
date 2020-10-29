@@ -2,22 +2,25 @@
 
 {% block content %}
   <header class="masthead bg-tertiary text-black ">
-    <div class="container d-flex flex-column">
-      <p class="masthead-subheading font-weight-light mb-3">
-        <b>Delete Topic</b></p>
-      <p class="masthead-subheading font-weight-light mb-3">
-        <b>Do you want to delete the topic "{{ topic.text }}"?</b></p>
-
+    <div class="container d-flex  align-items-center flex-column">
+        <div class="card mb-3">
+          <h4 class="card-header">
+            Do you want to delete this topic "{{ topic.text }}" ?
+          </h4>
+          <div class="card-body">
+            <b>{{ topic.text|safe }}</b>
+            {{ topic.body_text|safe }}
+            <br>
+          </div>
+        </div>
         <form action="{% url 'blog_QA:delete_topic' topic.id %}" class="form mb-3" method="POST">
-            {% csrf_token %}
-            <button name="submit" class="btn btn-primary">Yes</button>
-        </form>
-
-        <form action="{% url 'blog_QA:topics' %}">
-            {% csrf_token %}
-            <button name="submit" class="btn btn-primary">No</button>
-        </form>
-
+          {% csrf_token %}
+          <button name="submit" class="btn btn-primary" style="background-color: red;">Yes</button>
+      </form>
+      <form action="{% url 'blog_QA:topics' %}">
+        {% csrf_token %}
+        <button name="submit" class="btn btn-primary">No</button>
+    </form>
     </div>
 </header>
 
