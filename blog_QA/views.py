@@ -132,3 +132,19 @@ def delete_topic(request, topic_id):
 
     context = {'topic': topic}
     return render(request, 'blog_QA/delete_topic.html', context)
+
+@login_required
+def delete_entry(request, entry_id):
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+    # Make sure the topic belongs to the current user.
+    if entry.owner != request.user:
+        raise Http404
+
+    if request.method == 'POST':
+        # Delete confirmed
+        entry.delete()
+        return redirect('blog_QA:entries', topic.id)
+
+    context = {'entry': entry, 'topic': topic}
+    return render(request, 'blog_QA/delete_entry.html', context)

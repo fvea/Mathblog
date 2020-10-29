@@ -1,0 +1,25 @@
+{% extends 'blog_QA/base.html' %}
+
+{% block content %}
+  <header class="masthead bg-tertiary text-black ">
+    <div class="container d-flex  align-items-center flex-column">
+        <div class="card mb-3">
+          <h4 class="card-header">
+            Do you want to delete this entry to "{{ topic.text }}" ?
+          </h4>
+          <div class="card-body">
+            <b>{{ entry.text|safe }}</b><br>
+          </div>
+        </div>
+        <form action="{% url 'blog_QA:delete_entry' entry.id %}" class="form mb-3" method="POST">
+          {% csrf_token %}
+          <button name="submit" class="btn btn-primary" style="background-color: red;">Yes</button>
+        </form>
+        <form action="{% url 'blog_QA:entries' topic.id %}">
+            {% csrf_token %}
+            <button name="submit" class="btn btn-primary">No</button>
+        </form>
+    </div>
+</header>
+
+{% endblock content %}
