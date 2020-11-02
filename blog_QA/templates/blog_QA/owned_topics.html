@@ -1,0 +1,37 @@
+{% extends "blog_QA/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <header class="masthead bg-tertiary text-black">
+    <div class="container d-flex flex-column">
+      <h4 class="masthead-heading text-uppercase mb-4">Topics:</h4>
+      <form action="{% url 'blog_QA:new_topic' %}" method="GET">
+        {% buttons %}
+        <button name="submit" class="btn btn-primary">Add New Topic</button>
+        {% endbuttons %}
+      </form>
+      {% for topic in topics %}
+        <div class="card mb-3">
+          <h4 class="card-header">
+            <b>{{ topic.owner }}</b>
+            ({{ topic.date_added|date:'M d, Y H:i' }})
+            <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a></small>
+            <small><a href="{% url 'blog_QA:delete_topic' topic.id%}" style="color: red;">Delete Topic</a></small>
+          </h4>
+          <div class="card-body">
+            <b>{{ topic.text|safe }}</b>
+            {{ topic.body_text|safe }}
+            <form action="{% url 'blog_QA:entries' topic.id%}" method="GET">
+              {% buttons %}
+                <button name="submit" class="btn btn-primary">See entries</button>
+              {% endbuttons %}
+            </form>
+            <br>
+          </div>
+        </div>
+      {% empty %}
+        <p>No topics have been added yet.</p>
+      {% endfor %}
+    </div>
+  </header>
+{% endblock content %}

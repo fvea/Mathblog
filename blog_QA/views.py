@@ -148,3 +148,10 @@ def delete_entry(request, entry_id):
 
     context = {'entry': entry, 'topic': topic}
     return render(request, 'blog_QA/delete_entry.html', context)
+
+@login_required
+def owned_topics(request):
+    """ Show all owned topics. """
+    topics = Topic.objects.filter(owner=request.user).order_by('-date_added')
+    context = {'topics': topics}
+    return render(request, 'blog_QA/owned_topics.html', context)

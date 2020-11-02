@@ -25,4 +25,6 @@ urlpatterns = [
     path('delete_topic/<int:topic_id>/', views.delete_topic, name='delete_topic'),
     # Page for deleting an entry.
     path('delete_entry/<int:entry_id>/', views.delete_entry, name='delete_entry'),
+    # Page for viewing own topics.
+    path('owned_topics/', views.owned_topics, name='owned_topics'),
 ]
