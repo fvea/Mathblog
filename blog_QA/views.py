@@ -53,7 +53,7 @@ def new_topic(request):
 def entries(request, topic_id):
     """ See all the entries to a topic or Add a new entry """
     topic = Topic.objects.get(id=topic_id)
-    entries = topic.entry_set.order_by('-date_added')
+    entries = topic.entry_set.order_by('date_added')
 
     if request.method != 'POST':
         # No data submitted; create a blank form.
@@ -101,7 +101,7 @@ def edit_entry(request, entry_id):
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
     # Make sure the topic belongs to the current user.
-    if topic.owner != request.user:
+    if entry.owner != request.user:
         raise Http404
 
     if request.method != 'POST':

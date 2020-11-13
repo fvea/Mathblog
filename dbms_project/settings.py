@@ -151,7 +151,9 @@ CKEDITOR_CONFIGS = {
                 ['Indent','Outdent'],
                 ['EqnEditor','Maximize'],
             ],
+    'width': '100%',
     }
+
 }
 
 # My settings

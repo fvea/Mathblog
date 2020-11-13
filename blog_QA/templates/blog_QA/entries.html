@@ -11,17 +11,18 @@
           ({{ topic.date_added|date:'M d, Y H:i' }})
           {% if user == topic.owner %}
           <small><a href="{% url 'blog_QA:edit_topic' topic.id%}">Edit Topic</a></small>
-          <small><a href="{% url 'blog_QA:delete_entry' entry.id%}" style="color: red;">Delete Entry</a></small>
+          <small><a href="{% url 'blog_QA:delete_topic' topic.id%}" style="color: red;">Delete Topic</a></small>
           {% endif %}
         </h4>
         <div class="card-body">
+          <h3>{{ topic.text|safe }}</h3>
           {{ topic.body_text|safe }}<br>
+          <form action="#add_entry">
+            <button name="submit" class="btn btn-primary">Add new entry</button>
+          </form> 
         </div>
       </div>
-      <form action="#add_entry">
-        <button name="submit" class="btn btn-primary">Add new entry</button>
-      </form> 
-      <p class="masthead-subheading font-weight-light mb-1">Entries:</p>
+      <h3>Entries:</h3>
       {% for entry in entries %}
         <div class="card mb-3">
           <h4 class="card-header">
@@ -37,7 +38,7 @@
           </div>
         </div>
       {% empty %}
-        <p>There are no entries for this topic yet.</p> 
+        <h6>There are no entries for this topic yet.</h6>
       {% endfor %}
 
     <form action="{% url 'blog_QA:entries' topic.id%}" method="POST" class="form" id="add_entry">

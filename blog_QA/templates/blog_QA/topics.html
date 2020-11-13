@@ -4,7 +4,6 @@
 {% block content %}
   <header class="masthead bg-tertiary text-black">
     <div class="container d-flex flex-column">
-      <h4 class="masthead-heading text-uppercase mb-4">Topics:</h4>
       <form action="{% url 'blog_QA:new_topic' %}" method="GET">
         {% buttons %}
         <button name="submit" class="btn btn-primary">Add New Topic</button>
@@ -21,7 +20,7 @@
             {% endif %}
           </h4>
           <div class="card-body">
-            <b>{{ topic.text|safe }}</b>
+            <h3>{{ topic.text|safe }}</h3>
             {{ topic.body_text|safe }}
             <form action="{% url 'blog_QA:entries' topic.id%}" method="GET">
               {% buttons %}

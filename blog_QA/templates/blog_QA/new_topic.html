@@ -6,8 +6,7 @@
 
   <header class="masthead bg-tertiary text-black ">
     <div class="container d-flex flex-column">
-      <p class="masthead-subheading font-weight-light mb-3">
-        <b>Add a New Topic</b></p>
+      <h3>Add New Topic</h3>
 
       <form action="{% url 'blog_QA:new_topic' %}" method="POST">
           {% csrf_token %}

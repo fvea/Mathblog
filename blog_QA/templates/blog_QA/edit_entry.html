@@ -3,8 +3,6 @@
 {% block content %}
   <header class="masthead bg-tertiary text-black ">
     <div class="container d-flex flex-column">
-      <p class="masthead-subheading font-weight-light mb-3">
-        <b>Edit Entry</b></p>
     <form action="{% url 'blog_QA:edit_entry' entry.id %}" method="POST">
       {% csrf_token %}
       {{ form.media }}

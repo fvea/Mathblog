@@ -7,7 +7,7 @@
       <p class="masthead-subheading font-weight-light mb-3">
         <b>Edit Topic</b></p>
 
-      <form action="{% url 'blog_QA:new_topic' %}" method="POST">
+      <form action="{% url 'blog_QA:edit_topic' topic.id %}" method="POST">
           {% csrf_token %}
           {{ form.media }}
           {{ form.as_p }}
